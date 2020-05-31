@@ -4,12 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node bin/www",
-    "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www --exec babel-node",
-    "prd": "cross-env NODE_ENV=production pm2 start bin/www --exec babel-node",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www --exec",
+    "prd": "cross-env NODE_ENV=production pm2 start bin/www --exec",
+    "test": "cross-env NODE_ENV=test jest --runInBand --forceExit --colors"
   },
   "dependencies": {
-    "babel-preset-es2015": "^6.24.1",
     "debug": "^4.1.1",
     "ejs": "~2.3.3",
     "koa": "^2.7.0",
@@ -26,8 +25,9 @@
     "redis": "^3.0.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "cross-env": "^7.0.2",
-    "nodemon": "^1.19.1"
+    "jest": "^26.0.1",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }
