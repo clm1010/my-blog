@@ -10,11 +10,17 @@ const redisStore = require('koa-redis')
 
 const { REDIS_CONF } = require('./conf/db')
 
+// 路由
+const errorViewRouter = require('./routes/view/error')
 const index = require('./routes/index')
 const users = require('./routes/users')
 
 // error handler
-onerror(app)
+let onerrorConf = {}
+onerrorConf = {
+  redirect: '/error'
+}
+onerror(app, onerrorConf)
 
 // middlewares
 app.use(
@@ -50,17 +56,12 @@ app.use(
   })
 )
 
-// // logger
-// app.use(async (ctx, next) => {
-//   const start = new Date()
-//   await next()
-//   const ms = new Date() - start
-//   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-// })
-
 // routes
+
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+// 404路由注册到最后面
+app.use(errorViewRouter.routes(), index.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
