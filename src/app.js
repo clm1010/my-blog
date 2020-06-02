@@ -9,6 +9,7 @@ const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
 
 const { REDIS_CONF } = require('./conf/db')
+const { isProd } = require('./utils/env')
 
 // 路由
 const errorViewRouter = require('./routes/view/error')
@@ -17,9 +18,14 @@ const users = require('./routes/users')
 
 // error handler
 let onerrorConf = {}
-onerrorConf = {
-  redirect: '/error'
+// 如果是线上环境出现错误，跳转到错误页
+
+if (isProd) {
+  onerrorConf = {
+    redirect: '/error'
+  }
 }
+
 onerror(app, onerrorConf)
 
 // middlewares

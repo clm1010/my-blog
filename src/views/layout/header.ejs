@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title><%= title%></title>
 
-    <link
-      href="https://cdn.bootcss.com/twitter-bootstrap/4.3.0/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/css/main.css" rel="stylesheet" />
 
     <% if (locals.list) { %> <%# 有微博列表，以及右侧面板 %>
@@ -24,14 +21,11 @@
       }
     </style>
     <% } %> <% if (locals.isNav) { %> <%# 有导航%>
-    <link
-      href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
-    />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
     <% } %>
 
     <!-- jquery 要首先引入-->
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/javascripts/jquery.min.js"></script>
     <!-- 封装的 ajax -->
     <script src="/javascripts/my-ajax.js"></script>
 
