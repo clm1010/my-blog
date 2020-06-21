@@ -14,6 +14,7 @@ const { isProd } = require('./utils/env')
 // 路由
 const index = require('./routes/index')
 const userViewRouter = require('./routes/view/user')
+const userAPIRouter = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error')
 
 // error handler
@@ -64,6 +65,7 @@ app.use(
 
 // routes
 app.use(index.routes(), index.allowedMethods())
+app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 
 // 404路由注册到最后面
