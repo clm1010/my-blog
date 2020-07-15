@@ -79,3 +79,8 @@ dist
 
 # IDE
 .idea
+
+
+dump.rdb
+
+uploadFiles
