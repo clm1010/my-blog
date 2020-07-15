@@ -92,9 +92,25 @@ async function deleteCurUser(userName) {
   return new ErrorModel(deleteUserFailInfo)
 }
 
+/**
+ * 
+ * @param {Object} ctx 
+ * @param {string} nickName 昵称
+ * @param {string} city 城市
+ * @param {string} picture 头像
+ 
+ */
+async function changeInfo(ctx, { nickName, city, picture }) {
+  const { userName } = ctx.session.userInfo
+  if (!nickName) {
+    nickName = userName
+  }
+}
+
 module.exports = {
   isExist,
   register,
   login,
-  deleteCurUser
+  deleteCurUser,
+  changeInfo
 }

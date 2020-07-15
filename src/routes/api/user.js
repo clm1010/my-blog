@@ -49,4 +49,15 @@ router.post('/delete', loginCheck, async (ctx, next) => {
   }
 })
 
+// 修改个人信息 patch 是修改意思
+router.patch(
+  '/changeInfo',
+  loginCheck,
+  genValidator(userValidate),
+  async (ctx, next) => {
+    const { nickName, city, picture } = ctx.request.body
+    // controller
+  }
+)
+
 module.exports = router

@@ -68,6 +68,16 @@ async function deleteUser(userName) {
   return result > 0
 }
 
+/**
+ * 更新用户信息
+ * @param {Object} param1 要修改的内容{ newPassword, newNickName, newPicture, newCity }
+ * @param {Object} param2 查询条件 { userName, password }
+ */
+async function updateUser(
+  { newPassword, newNickName, newPicture, newCity },
+  { userName, password }
+) {}
+
 module.exports = {
   getUserInfo,
   createUser,
