@@ -8,7 +8,8 @@ const {
   isExist,
   register,
   login,
-  deleteCurUser
+  deleteCurUser,
+  changeInfo
 } = require('../../controller/user')
 const userValidate = require('../../validator/user')
 const { genValidator } = require('../../middlewares/validator')
@@ -17,7 +18,7 @@ const { loginCheck } = require('../../middlewares/loginChecks')
 
 router.prefix('/api/user')
 
-//  注册路由
+// 注册路由
 router.post('/register', genValidator(userValidate), async (ctx, next) => {
   const { userName, password, gender } = ctx.request.body
   ctx.body = await register({
@@ -27,7 +28,7 @@ router.post('/register', genValidator(userValidate), async (ctx, next) => {
   })
 })
 
-//  用户名是否存在
+// 用户名是否存在
 router.post('/isExist', async (ctx, next) => {
   const { userName } = ctx.request.body
   ctx.body = await isExist(userName)
@@ -56,7 +57,7 @@ router.patch(
   genValidator(userValidate),
   async (ctx, next) => {
     const { nickName, city, picture } = ctx.request.body
-    // controller
+    ctx.body = await changeInfo(ctx, { nickName, city, picture })
   }
 )
 
