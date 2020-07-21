@@ -14,6 +14,7 @@ const { REDIS_CONF } = require('./conf/db')
 const { isProd } = require('./utils/env')
 
 // 路由
+const homeAPIRouter = require('./routes/api/blog-home')
 const blogViewRouter = require('./routes/view/blog')
 const utilsAPIRouter = require('./routes/api/utils')
 const userViewRouter = require('./routes/view/user')
@@ -68,6 +69,7 @@ app.use(
 )
 
 // routes
+app.use(homeAPIRouter.routes(), homeAPIRouter.allowedMethods())
 app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
 app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods())
 app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
