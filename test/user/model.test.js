@@ -6,7 +6,7 @@
 const { User } = require('../../src/db/model/index')
 const { TestScheduler } = require('jest')
 
-test('User 模型的各个属性，符合预期', () => {
+test('User 模型的各个属性，符合预期', async () => {
   // build 会构建一个内存的 User 实例，但不会提交到数据库中
   const user = User.build({
     userName: 'zhangsan',
