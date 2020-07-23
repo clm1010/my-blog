@@ -5,5 +5,6 @@
 
 module.exports = {
   // // DEFAULT_PICTURE: 'https://dwz.cn/rnTnftZs'
-  DEFAULT_PICTURE: '/img/picture.png'
+  DEFAULT_PICTURE: '/img/picture.png',
+  PAGE_SIZE: 5
 }
