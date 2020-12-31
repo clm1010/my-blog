@@ -19,7 +19,7 @@ const {
   changeInfoFailInfo,
   changePasswordFailInfo
 } = require('../model/ErrorInfo')
-const doCrypto = require('c:/users/clm/desktop/koa2-weibo/src/utils/cryp')
+const doCrypto = require('../utils/cryp')
 
 /**
  * 用户名是否存在

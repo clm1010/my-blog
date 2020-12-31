@@ -34,7 +34,8 @@ async function getBlogListByUser({ userName, pageIndex = 0, pageSize = 10 }) {
   const result = await Blog.findAndCountAll({
     limit: pageSize, // 每页多少条
     offset: pageSize * pageIndex, // 跳过多少条
-    order: [['id', 'desc ']],
+    // order: [['id', 'desc ']],
+    order: [['id', 'DESC']],
     include: [
       {
         model: User,
