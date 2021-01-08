@@ -8,12 +8,18 @@ const { loginRedirect } = require('../../middlewares/loginChecks')
 const { getProfileBlogList } = require('../../controller/blog-profile')
 const { isExist } = require('../../controller/user')
 
-// 首页
+/**
+ * @description 首页
+ * @author CLM
+ */
 router.get('/', loginRedirect, async (ctx, next) => {
   await ctx.render('index', {})
 })
 
-// 个人主页
+/**
+ * @description 个人主页
+ * @author CLM
+ */
 router.get('/profile', loginRedirect, async (ctx, next) => {
   const { userName } = ctx.session.userInfo
   ctx.redirect(`/profile/${userName}`)
@@ -27,13 +33,13 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
   let curUserInfo
   const { userName: curUserName } = ctx.params
   const isMe = myUserName === curUserName
-  if(isMe) {
+  if (isMe) {
     // 是当前登录用户
     curUserInfo = myUserInfo
   } else {
     // 不是当前登录用户
     const existResult = await isExist(curUserName)
-    if(existResult.errno !== 0) {
+    if (existResult.errno !== 0) {
       // 用户名不存在
       return
     }
@@ -43,7 +49,7 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
 
   // 获取微博第一页数据
   const result = await getProfileBlogList(curUserName, 0)
-  const { isEmpty, blogList, pageSize, pageIndex, count } = result
+  const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
   await ctx.render('profile', {
     blogData: {
       isEmpty,
