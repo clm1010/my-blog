@@ -26,23 +26,17 @@ function getLoginInfo(ctx) {
   return data
 }
 
-/**
- * login 路由
- */
+// login 路由
 router.get('/login', async (ctx, next) => {
   await ctx.render('login', getLoginInfo(ctx))
 })
 
-/**
- *  register 路由
- */
+// register 路由
 router.get('/register', async (ctx, next) => {
   await ctx.render('register', getLoginInfo(ctx))
 })
 
-/**
- * setting 路由
- */
+// setting 路由
 router.get('/setting', loginRedirect, async (ctx, next) => {
   await ctx.render('setting', ctx.session.userInfo)
 })

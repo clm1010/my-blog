@@ -4,7 +4,7 @@
  */
 
 const router = require('koa-router')()
-const { loginCheck, loginRedirect } = require('../../middlewares/loginChecks')
+const { loginCheck } = require('../../middlewares/loginChecks')
 const koaFrom = require('formidable-upload-koa')
 const { saveFile } = require('../../controller/utils')
 
@@ -24,4 +24,5 @@ router.post('/upload', loginCheck, koaFrom(), async (ctx, next) => {
     filePath: path
   })
 })
+
 module.exports = router

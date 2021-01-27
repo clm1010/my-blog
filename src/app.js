@@ -12,8 +12,12 @@ const koaStatic = require('koa-static')
 
 const { REDIS_CONF } = require('./conf/db')
 const { isProd } = require('./utils/env')
+const { SESSION_SECRET_KEY } = require('./conf/secretKeys')
 
 // 路由
+const atAPIRouter = require('./routes/api/blog-at')
+const squareAPIRouter = require('./routes/api/blog-square')
+const profileAPIRouter = require('./routes/api/blog-profile')
 const homeAPIRouter = require('./routes/api/blog-home')
 const blogViewRouter = require('./routes/view/blog')
 const utilsAPIRouter = require('./routes/api/utils')
@@ -23,8 +27,8 @@ const errorViewRouter = require('./routes/view/error')
 
 // error handler
 let onerrorConf = {}
-// 如果是线上环境出现错误，跳转到错误页
 
+// 如果是线上环境出现错误，跳转到错误页
 if (isProd) {
   onerrorConf = {
     redirect: '/error'
@@ -51,15 +55,15 @@ app.use(
 )
 
 // session 设置 加密
-app.keys = ['Clm_851010!#$']
+app.keys = [SESSION_SECRET_KEY]
 app.use(
   session({
-    key: 'weibo.sid', // cookie name 默认 `koa.sid`
-    prefix: 'weibo:sess:', //redis key 的前缀，默认是`koa:sess:`
+    key: 'weibo.sid', // cookie name 默认是 `koa.sid`
+    prefix: 'weibo:sess:', // redis key 的前缀，默认是 `koa:sess:`
     cookie: {
       path: '/',
       httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000 // cookie过期时间
+      maxAge: 24 * 60 * 60 * 1000 // cookie过期时间 单位 ms
     },
     // ttl: 24 * 60 * 60 * 1000, // redis过期时间，如果cookie配置了过期时间 这里就不需要写了
     store: redisStore({
@@ -69,6 +73,9 @@ app.use(
 )
 
 // routes
+app.use(atAPIRouter.routes(), atAPIRouter.allowedMethods())
+app.use(squareAPIRouter.routes(), squareAPIRouter.allowedMethods())
+app.use(profileAPIRouter.routes(), profileAPIRouter.allowedMethods())
 app.use(homeAPIRouter.routes(), homeAPIRouter.allowedMethods())
 app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
 app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods())

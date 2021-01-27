@@ -7,7 +7,7 @@ const redis = require('redis')
 const { REDIS_CONF } = require('../conf/db')
 
 // 创建客户端
-const redisClient = redis.createClient(REDIS_CONF.host, REDIS_CONF.port)
+const redisClient = redis.createClient(REDIS_CONF.port, REDIS_CONF.host)
 redisClient.on('error', (err) => {
   console.error('redis error', err)
 })
@@ -16,7 +16,7 @@ redisClient.on('error', (err) => {
  * redis set
  * @param {string} key 键
  * @param {string} val 值
- * @param {string} timeout 过期时间，单位 s
+ * @param {number} timeout 过期时间，单位 s
  */
 function set(key, val, timeout = 60 * 60) {
   if (typeof val === 'object') {
